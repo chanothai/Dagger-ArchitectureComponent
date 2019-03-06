@@ -1,0 +1,9 @@
+ext.config = [
+        applicationId : "com.ballomo.thelastavenger",
+        compileSdk : 28,
+        minSdk : 21,
+        targetSdk : 28
+]
+
+def config = ext.config
+
