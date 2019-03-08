@@ -1,0 +1,12 @@
+android {
+    flavorDimensions "minApi" "environment"
+
+    productFlovers {
+        minApi21 {
+            dimension "minApi"
+            minSdkVersion 21
+            versionNameSuffix "-minApi21"
+            applicationIdSuffix ".minApi21"
+        }
+    }
+}

@@ -1,1 +1,30 @@
-include ':app'
+includeFlat("TabCommon")
+
+class Module {
+    String name
+    String path
+}
+
+void addProject(String name, String path) {
+    include name
+
+    if (path != null) {
+        if (path == ":app") {
+            project(name).projectDir = new File("app")
+        }else {
+            project(name).projectDir = new File(path)
+        }
+    }
+}
+
+List<Module> modules = new ArrayList<>()
+modules.with {
+    add(new Module(name: ":app", path: ":app"))
+    add(new Module(name: ":common", path: "../TabCommon/common"))
+    add(new Module(name: ":commonapp", path: "../TabCommon/commonapp"))
+    add(new Module(name: ":shared", path: "../TabCommon/shared"))
+}
+
+modules.forEach {
+    addProject(it.name, it.path)
+}

@@ -2,8 +2,26 @@ ext.config = [
         applicationId : "com.ballomo.thelastavenger",
         compileSdk : 28,
         minSdk : 21,
-        targetSdk : 28
+        targetSdk : 28,
+        kotlin: '1.3.20'
 ]
 
 def config = ext.config
 
+ext.ver = [
+        dagger: '2.20',
+        coreKtx: '1.1.0-alpha04',
+        conLayout: '1.1.3',
+        appCompat: '1.1.0-alpha02',
+        legacy: '1.0.0',
+        testRun: '1.1.2-alpha01',
+        espresso: '3.1.2-alpha01',
+        lifecycle: '2.0.0-beta01',
+        gson: '2.8.5',
+        rxAndroid: '2.1.0',
+        rxKotlin: '2.3.0',
+        retrofit: '2.4.0',
+        interceptor: '3.11.0',
+]
+
+def ver = ext.ver
