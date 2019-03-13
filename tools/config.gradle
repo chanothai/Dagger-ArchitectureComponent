@@ -21,7 +21,7 @@ ext.ver = [
         rxAndroid: '2.1.0',
         rxKotlin: '2.3.0',
         retrofit: '2.4.0',
-        interceptor: '3.11.0',
+        interceptor: '3.12.1',
 ]
 
 def ver = ext.ver

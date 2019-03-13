@@ -1,35 +1,22 @@
-apply plugin: "com.android.application"
-
+apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
-
 apply plugin: "kotlin-android-extensions"
 apply plugin: "kotlin-kapt"
-apply from: "$project.rootDir/tools/applyCommon.gradle"
-apply from: "$project.rootDir/tools/improveSpeed.gradle"
+apply from: "$project.rootDir/tools/config.gradle"
 
 android {
     compileSdkVersion config.compileSdk
     defaultConfig {
-        applicationId config.applicationId
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-                    "$project.rootDir/tools/rules-progaurd.pro"
-        }
-
-        debug {
-            versionNameSuffix " Debug"
-            applicationIdSuffix ".debug"
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-                    "$project.rootDir/tools/rules-progaurd-debug.pro"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
 }
@@ -45,7 +32,11 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$ver.testRun"
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
 
-    implementation project(":shared")
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$ver.lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$ver.lifecycle"
+    testImplementation "androidx.arch.core:core-testing:$ver.lifecycle"
+
     //Dagger 2
     implementation "com.google.dagger:dagger:$ver.dagger"
     kapt "com.google.dagger:dagger-compiler:$ver.dagger"
@@ -60,13 +51,6 @@ dependencies {
     kapt("com.google.dagger:dagger-android-processor:$ver.dagger") {
         exclude group: "com.android.support"
     }
-
-    //Gson
-    implementation "com.google.code.gson:gson:$ver.gson"
-
-    //Rx2
-    implementation "io.reactivex.rxjava2:rxandroid:$ver.rxAndroid"
-    implementation "io.reactivex.rxjava2:rxkotlin:$ver.rxKotlin"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$ver.retrofit"

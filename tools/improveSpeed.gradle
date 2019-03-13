@@ -1,7 +1,12 @@
 android {
-    flavorDimensions "minApi" "environment"
+    flavorDimensions "minApi","environment"
+    productFlavors {
+        dev {
+            dimension "environment"
+            applicationIdSuffix ".dev"
+            buildConfigField("String", "SERVICE_URL", "\"https://rickandmortyapi.com/\"")
+        }
 
-    productFlovers {
         minApi21 {
             dimension "minApi"
             minSdkVersion 21
