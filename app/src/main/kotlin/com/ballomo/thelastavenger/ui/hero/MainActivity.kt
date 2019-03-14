@@ -25,6 +25,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         heroViewModel = viewModelProvider(viewModelFactory)
+
         heroViewModel.messageLiveData.observe(this, EventObserver {message ->
 
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()

@@ -52,6 +52,10 @@ dependencies {
         exclude group: "com.android.support"
     }
 
+    //Rx2
+    implementation "io.reactivex.rxjava2:rxandroid:$ver.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$ver.rxKotlin"
+
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$ver.retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$ver.retrofit"
