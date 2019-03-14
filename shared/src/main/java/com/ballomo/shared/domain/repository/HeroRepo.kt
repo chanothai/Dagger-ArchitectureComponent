@@ -11,7 +11,7 @@ class HeroRepo @Inject constructor(
 ) : HeroAdapter {
 
     override fun getAll(): Observable<HeroEntity> {
-       return heroApi.getHeros()
+       return heroApi.getHeros().subscribeOn(Schedulers.io())
     }
 
     override fun get() {

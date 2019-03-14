@@ -45,7 +45,7 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$ver.testRun"
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
 
-    implementation project(":shared")
+    api project(":shared")
     //Dagger 2
     implementation "com.google.dagger:dagger:$ver.dagger"
     kapt "com.google.dagger:dagger-compiler:$ver.dagger"

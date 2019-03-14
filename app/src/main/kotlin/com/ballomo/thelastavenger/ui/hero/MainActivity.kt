@@ -2,6 +2,7 @@ package com.ballomo.thelastavenger.ui.hero
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ballomo.shared.result.EventObserver
 import com.ballomo.shared.util.viewModelProvider
