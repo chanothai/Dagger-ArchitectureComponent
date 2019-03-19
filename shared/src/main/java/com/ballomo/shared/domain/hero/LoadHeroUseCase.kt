@@ -1,6 +1,7 @@
-package com.ballomo.shared.domain
+package com.ballomo.shared.domain.hero
 
-import com.ballomo.shared.domain.repository.HeroAdapter
+import com.ballomo.shared.domain.MediatorUseCase
+import com.ballomo.shared.data.repository.HeroAdapter
 import io.reactivex.Observable
 import javax.inject.Inject
 

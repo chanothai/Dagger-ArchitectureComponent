@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ballomo.shared.domain.ListHeroInformation
-import com.ballomo.shared.domain.LoadHeroInformation
+import com.ballomo.shared.domain.hero.ListHeroInformation
+import com.ballomo.shared.domain.hero.LoadHeroInformation
 import com.ballomo.thelastavenger.R
 import com.ballomo.thelastavenger.databinding.ItemInformationHeroPostBinding
 

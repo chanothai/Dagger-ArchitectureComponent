@@ -63,4 +63,8 @@ dependencies {
 
     //Interceptor OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$ver.interceptor"
+
+    //mockito
+    testImplementation "androidx.arch.core:core-testing:$ver.mockitoCore"
+    testImplementation "org.mockito:mockito-inline:$ver.mockitoInline"
 }

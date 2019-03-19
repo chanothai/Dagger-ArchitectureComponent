@@ -1,4 +1,4 @@
-package com.ballomo.shared.domain.entity
+package com.ballomo.shared.domain.hero.entity
 
 import com.google.gson.annotations.SerializedName
 

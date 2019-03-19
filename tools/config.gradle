@@ -25,6 +25,8 @@ ext.ver = [
         recyclerView: '1.0.0',
         dataBinding: '3.1.4',
         glide: '4.8.0',
+        mockitoCore: '2.0.0',
+        mockitoInline: '2.15.0'
 ]
 
 def ver = ext.ver

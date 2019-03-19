@@ -1,7 +1,7 @@
-package com.ballomo.shared.domain.repository
+package com.ballomo.shared.data.repository
 
-import com.ballomo.shared.domain.api.HeroApi
-import com.ballomo.shared.domain.entity.HeroEntity
+import com.ballomo.shared.data.api.HeroApi
+import com.ballomo.shared.domain.hero.entity.HeroEntity
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

@@ -1,6 +1,6 @@
-package com.ballomo.shared.domain.api
+package com.ballomo.shared.data.api
 
-import com.ballomo.shared.domain.entity.HeroEntity
+import com.ballomo.shared.domain.hero.entity.HeroEntity
 import io.reactivex.Observable
 import retrofit2.http.GET
 

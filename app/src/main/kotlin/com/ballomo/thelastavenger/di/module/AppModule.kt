@@ -1,9 +1,9 @@
 package com.ballomo.thelastavenger.di.module
 
 import android.content.Context
-import com.ballomo.shared.domain.LoadHeroUseCase
-import com.ballomo.shared.domain.api.HeroApi
-import com.ballomo.shared.domain.repository.HeroRepo
+import com.ballomo.shared.domain.hero.LoadHeroUseCase
+import com.ballomo.shared.data.api.HeroApi
+import com.ballomo.shared.data.repository.HeroRepo
 import com.ballomo.thelastavenger.AwesomeApplication
 import com.ballomo.thelastavenger.util.UserPreference
 import dagger.Module

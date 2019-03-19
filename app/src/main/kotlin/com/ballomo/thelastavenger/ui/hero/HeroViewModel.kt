@@ -4,8 +4,8 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ballomo.shared.domain.ListHeroInformation
-import com.ballomo.shared.domain.LoadHeroUseCase
+import com.ballomo.shared.domain.hero.ListHeroInformation
+import com.ballomo.shared.domain.hero.LoadHeroUseCase
 import com.ballomo.shared.result.Event
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

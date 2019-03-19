@@ -3,7 +3,7 @@
 
     <data>
         <variable name="heroInformation"
-                  type="com.ballomo.shared.domain.LoadHeroInformation"/>
+                  type="com.ballomo.shared.domain.hero.LoadHeroInformation"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
