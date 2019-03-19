@@ -37,7 +37,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$config.kotlin"
-    implementation "androidx.appcompat:appcompat:$ver.appCompat"
+    implementation "androidx.appcompat:appcompat:$ver.android_support_version"
     implementation "androidx.core:core-ktx:$ver.coreKtx"
     implementation "androidx.constraintlayout:constraintlayout:$ver.conLayout"
     implementation "androidx.legacy:legacy-support-v4:$ver.legacy"
@@ -46,6 +46,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
 
     implementation project(":shared")
+
     //Dagger 2
     implementation "com.google.dagger:dagger:$ver.dagger"
     kapt "com.google.dagger:dagger-compiler:$ver.dagger"
@@ -75,4 +76,14 @@ dependencies {
 
     //Interceptor OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$ver.interceptor"
+
+
+    //DataBinding
+    kapt "com.android.databinding:compiler:$ver.dataBinding"
+
+    //RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$ver.recyclerView"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$ver.glide"
 }

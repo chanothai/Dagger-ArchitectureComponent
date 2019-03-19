@@ -1,13 +1,12 @@
-package com.ballomo.thelastavenger.ui.hero.model
+package com.ballomo.shared.domain.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class HeroApiResponse(
+data class HeroEntity(
     @SerializedName("info")
     var info: Info = Info(),
     @SerializedName("results")
     var results: List<Results> = listOf()
-
 )
 
 data class Info(

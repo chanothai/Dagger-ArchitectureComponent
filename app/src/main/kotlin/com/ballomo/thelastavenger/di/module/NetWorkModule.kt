@@ -2,7 +2,7 @@ package com.ballomo.thelastavenger.di.module
 
 import com.ballomo.thelastavenger.network.OKHttpClientFactory
 import com.ballomo.thelastavenger.network.RetrofitFactory
-import com.ballomo.thelastavenger.ui.hero.api.HeroApi
+import com.ballomo.shared.domain.api.HeroApi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
