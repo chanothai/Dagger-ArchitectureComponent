@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="heroInformation"
+                  type="com.ballomo.shared.domain.LoadHeroInformation"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:padding="@dimen/padding_small"
+    >
+
+        <ImageView
+                android:id="@+id/img_hero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imageUrl="@{heroInformation.image}"
+                app:circleCrop="@{true}"
+                app:drawable="@{@drawable/ic_launcher_background}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.3"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_name"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:padding="24dp"
+                app:mutableText="@{heroInformation.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/img_hero"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
