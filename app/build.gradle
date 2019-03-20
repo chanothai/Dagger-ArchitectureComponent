@@ -86,4 +86,8 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$ver.glide"
+
+    //mockito
+    testImplementation "androidx.arch.core:core-testing:$ver.mockitoCore"
+    testImplementation "org.mockito:mockito-inline:$ver.mockitoInline"
 }

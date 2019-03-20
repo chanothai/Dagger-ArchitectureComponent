@@ -11,7 +11,7 @@ import com.ballomo.thelastavenger.databinding.ItemInformationHeroPostBinding
 
 class PostHeroListAdapter: RecyclerView.Adapter<PostHeroListViewHolder>() {
 
-    lateinit var heroList: ListHeroInformation
+    var heroList = ListHeroInformation(arrayListOf())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHeroListViewHolder {
         val binding: ItemInformationHeroPostBinding = DataBindingUtil.inflate(
@@ -24,7 +24,7 @@ class PostHeroListAdapter: RecyclerView.Adapter<PostHeroListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return if (::heroList.isInitialized) heroList.heroInformation.size else 0
+        return if (heroList.heroInformation.isNotEmpty()) heroList.heroInformation.size else 0
     }
 
     override fun onBindViewHolder(holder: PostHeroListViewHolder, position: Int) {

@@ -28,6 +28,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$ver.coreKtx"
     implementation "androidx.constraintlayout:constraintlayout:$ver.conLayout"
     implementation "androidx.legacy:legacy-support-v4:$ver.legacy"
+
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:$ver.testRun"
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"

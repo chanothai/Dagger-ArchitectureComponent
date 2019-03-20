@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.ballomo.shared.domain.hero.ListHeroInformation
 import com.ballomo.shared.domain.hero.LoadHeroUseCase
 import com.ballomo.shared.result.Event
@@ -18,6 +19,7 @@ class HeroViewModel @Inject constructor(
 ) : ViewModel() {
 
     val postHeroListAdapter = PostHeroListAdapter()
+
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     private val disposable by lazy { CompositeDisposable() }
@@ -30,7 +32,7 @@ class HeroViewModel @Inject constructor(
         loadHeroUseCase.execute(Unit)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onPostStart() }
-            .doOnTerminate { onPostFinish() }
+            .doFinally { onPostFinish() }
             .subscribeBy (
                 onNext = { onPostSuccess(it) },
                 onError = {onPostError(it)}
