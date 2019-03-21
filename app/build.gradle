@@ -7,6 +7,9 @@ apply plugin: "kotlin-kapt"
 apply from: "$project.rootDir/tools/applyCommon.gradle"
 apply from: "$project.rootDir/tools/improveSpeed.gradle"
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+
 android {
     compileSdkVersion config.compileSdk
     defaultConfig {
@@ -90,4 +93,8 @@ dependencies {
     //mockito
     testImplementation "androidx.arch.core:core-testing:$ver.mockitoCore"
     testImplementation "org.mockito:mockito-inline:$ver.mockitoInline"
+
+    //Navigate
+    implementation "androidx.navigation:navigation-fragment:$ver.navigate" // For Kotlin use navigation-fragment-ktx
+    implementation "androidx.navigation:navigation-ui:$ver.navigate" // For Kotlin use navigation-ui-ktx
 }
