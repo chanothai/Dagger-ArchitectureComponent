@@ -1,9 +1,11 @@
 package com.ballomo.shared.data.repository
 
+import androidx.lifecycle.LiveData
+import com.ballomo.shared.domain.Result
 import com.ballomo.shared.domain.hero.entity.HeroEntity
-import io.reactivex.Observable
 
 interface HeroAdapter {
-    fun getAll(): Observable<HeroEntity>
+    fun getAll(): LiveData<Result<HeroEntity>>
     fun get()
+//    fun getAllByPage(page: String): Observable<HeroDataSourceFactory>
 }

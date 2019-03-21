@@ -5,9 +5,12 @@ import com.ballomo.shared.domain.hero.LoadHeroUseCase
 import com.ballomo.shared.data.api.HeroApi
 import com.ballomo.shared.data.repository.HeroRepo
 import com.ballomo.thelastavenger.AwesomeApplication
+import com.ballomo.thelastavenger.ui.hero.HeroViewModel
 import com.ballomo.thelastavenger.util.UserPreference
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Module

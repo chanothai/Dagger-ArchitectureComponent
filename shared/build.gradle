@@ -20,6 +20,9 @@ android {
         }
     }
 }
+kapt {
+    generateStubs = true
+}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -65,7 +68,10 @@ dependencies {
     //Interceptor OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$ver.interceptor"
 
-    //mockito
+    //Mockito
     testImplementation "androidx.arch.core:core-testing:$ver.mockitoCore"
     testImplementation "org.mockito:mockito-inline:$ver.mockitoInline"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:$ver.paging"
 }

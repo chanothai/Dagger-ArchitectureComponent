@@ -6,18 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ballomo.shared.domain.hero.ListHeroInformation
 import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.common.BaseFragment
 import com.ballomo.thelastavenger.databinding.FragmentMainBinding
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [MainFragment.newInstance] factory method to
@@ -53,7 +48,25 @@ class MainFragment : BaseFragment() {
         binding.viewModel = heroViewModel
 
         heroViewModel.loadHeroInformation()
+        observeHeroInformation()
     }
 
+    private fun observeHeroInformation() {
+        heroViewModel.heroInformation?.observe(this, Observer {
+            when(it) {
+                is ListHeroInformation -> {
+                    binding.viewModel?.loadingVisibility?.value = View.GONE
+                    binding.viewModel?.postHeroListAdapter?.updateListHeroInformation(it)
+                }
+                is Boolean -> {
+                    if (it) {
+                        binding.viewModel?.loadingVisibility?.value = View.VISIBLE
+                    } else {
+                        binding.viewModel?.loadingVisibility?.value = View.GONE
+                    }
+                }
+            }
+        })
+    }
 
 }
