@@ -18,7 +18,7 @@ class HeroViewModel @Inject constructor(
     private val loadHeroUseCase: LoadHeroUseCase
 ) : ViewModel() {
 
-    val postHeroListAdapter = PostHeroListAdapter()
+    val postHeroListAdapter by lazy { PostHeroListAdapter() }
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
