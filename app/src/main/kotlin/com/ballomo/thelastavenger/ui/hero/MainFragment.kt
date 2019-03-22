@@ -52,7 +52,7 @@ class MainFragment : BaseFragment() {
     }
 
     private fun observeHeroInformation() {
-        heroViewModel.heroInformation?.observe(this, Observer {
+        heroViewModel.loadHeroResult.observe(this, Observer {
             when(it) {
                 is ListHeroInformation -> {
                     binding.viewModel?.loadingVisibility?.value = View.GONE

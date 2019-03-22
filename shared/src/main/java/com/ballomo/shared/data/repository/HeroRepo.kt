@@ -1,6 +1,5 @@
 package com.ballomo.shared.data.repository
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.ballomo.shared.data.api.HeroApi
@@ -10,7 +9,6 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-@SuppressLint("CheckResult")
 class HeroRepo @Inject constructor(
     private val heroApi: HeroApi
 ) : HeroAdapter {
@@ -18,12 +16,12 @@ class HeroRepo @Inject constructor(
     private val sessionResult = MediatorLiveData<Result<HeroEntity>>()
 
     override fun getAll(): LiveData<Result<HeroEntity>> {
-    heroApi.getHeros()
-        .subscribeOn(Schedulers.io())
-        .subscribeBy(
-            onNext = {sessionResult.postValue(Result.Success(it))},
-            onError = {sessionResult.postValue(Result.Error(it))}
-        )
+        heroApi.getHeros()
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+                onNext = {sessionResult.postValue(Result.Success(it))},
+                onError = {sessionResult.postValue(Result.Error(it))}
+            ).isDisposed
 
     return sessionResult
 }
