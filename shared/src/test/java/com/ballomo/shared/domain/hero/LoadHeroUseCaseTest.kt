@@ -17,13 +17,13 @@ class LoadHeroUseCaseTest {
 
     @Mock
     lateinit var heroRepo: HeroRepo
-    private lateinit var loadHeroUseCase: LoadHeroUseCase
+    private lateinit var loadHeroUseCase: com.ballomo.thelastavenger.domain.LoadHeroUseCase
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
 
-        loadHeroUseCase = LoadHeroUseCase(heroRepo)
+        loadHeroUseCase = com.ballomo.thelastavenger.domain.LoadHeroUseCase(heroRepo)
     }
 
     @Test

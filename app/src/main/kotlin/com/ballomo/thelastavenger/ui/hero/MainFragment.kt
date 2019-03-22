@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ballomo.shared.domain.hero.ListHeroInformation
 import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.common.BaseFragment
 import com.ballomo.thelastavenger.databinding.FragmentMainBinding
+import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
+
 /**
  * A simple [Fragment] subclass.
  * Use the [MainFragment.newInstance] factory method to
@@ -59,14 +60,9 @@ class MainFragment : BaseFragment() {
                     binding.viewModel?.postHeroListAdapter?.updateListHeroInformation(it)
                 }
                 is Boolean -> {
-                    if (it) {
-                        binding.viewModel?.loadingVisibility?.value = View.VISIBLE
-                    } else {
-                        binding.viewModel?.loadingVisibility?.value = View.GONE
-                    }
+                    binding.viewModel?.loadingVisibility?.value = View.VISIBLE
                 }
             }
         })
     }
-
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ballomo.shared.domain.Result
-import com.ballomo.shared.domain.hero.LoadHeroUseCase
+import com.ballomo.thelastavenger.domain.LoadHeroUseCase
 import com.ballomo.shared.util.map
 import javax.inject.Inject
 
@@ -27,6 +27,6 @@ class HeroViewModel @Inject constructor(
     }
 
     fun loadHeroInformation() {
-        loadHeroUseCase.execute(Unit)
+        loadHeroUseCase.executeLoadAll(Unit)
     }
 }

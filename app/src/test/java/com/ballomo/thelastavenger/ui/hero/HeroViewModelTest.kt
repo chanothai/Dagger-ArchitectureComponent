@@ -2,7 +2,7 @@ package com.ballomo.thelastavenger.ui.hero
 
 import com.ballomo.shared.domain.hero.ListHeroInformation
 import com.ballomo.shared.domain.hero.LoadHeroInformation
-import com.ballomo.shared.domain.hero.LoadHeroUseCase
+import com.ballomo.thelastavenger.domain.LoadHeroUseCase
 import com.ballomo.shared.result.Event
 import com.ballomo.thelastavenger.baseTest.BaseTest
 import io.reactivex.Observable

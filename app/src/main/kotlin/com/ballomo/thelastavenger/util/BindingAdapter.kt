@@ -1,4 +1,4 @@
-package com.ballomo.thelastavenger.ui.hero
+package com.ballomo.thelastavenger.util
 
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -9,7 +9,6 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.ballomo.shared.domain.hero.ListHeroInformation
 import com.ballomo.shared.util.getParentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
