@@ -1,13 +1,13 @@
-package com.ballomo.thelastavenger.ui.hero
+package com.ballomo.thelastavenger.ui.hero.all
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ballomo.shared.domain.hero.ListHeroInformation
-import com.ballomo.shared.domain.hero.LoadHeroInformation
 import com.ballomo.thelastavenger.R
 import com.ballomo.thelastavenger.databinding.ItemInformationHeroPostBinding
+import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
+import com.ballomo.thelastavenger.ui.hero.model.LoadHeroInformation
 
 class PostHeroListAdapter: RecyclerView.Adapter<PostHeroListViewHolder>() {
 

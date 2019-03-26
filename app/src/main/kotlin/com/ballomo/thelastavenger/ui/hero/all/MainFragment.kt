@@ -1,4 +1,4 @@
-package com.ballomo.thelastavenger.ui.hero
+package com.ballomo.thelastavenger.ui.hero.all
 
 
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.common.BaseFragment
 import com.ballomo.thelastavenger.databinding.FragmentMainBinding
+import com.ballomo.thelastavenger.ui.hero.MainActivity
 import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
 
 /**
@@ -44,8 +43,6 @@ class MainFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        binding.postHero.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         binding.viewModel = heroViewModel
 
         heroViewModel.loadHeroInformation()

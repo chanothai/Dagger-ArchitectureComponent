@@ -2,13 +2,20 @@ package com.ballomo.shared.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Transformations
+import androidx.paging.toLiveData
+import com.ballomo.shared.data.HeroAdapter
+import com.ballomo.shared.data.Listing
 import com.ballomo.shared.data.api.HeroApi
+import com.ballomo.shared.data.entity.HeroEntity
+import com.ballomo.shared.data.entity.hero.Results
+import com.ballomo.shared.data.source.HeroDataSourceFactory
 import com.ballomo.shared.domain.Result
-import com.ballomo.shared.domain.hero.entity.HeroEntity
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@Suppress("UNCHECKED_CAST")
 class HeroRepo @Inject constructor(
     private val heroApi: HeroApi
 ) : HeroAdapter {
@@ -27,11 +34,25 @@ class HeroRepo @Inject constructor(
 }
 
     override fun get() {
-
+        //Not yet implement
     }
 
-//    override fun getAllByPage(page: String): Observable<HeroDataSourceFactory> {
-//        val source = HeroDataSourceFactory(heroApi, disposable, page)
-//        return Observable.just(source)
-//    }
+    override fun getByPage(pageSize: Int): Listing<Results> {
+        val sourceFactory = HeroDataSourceFactory(heroApi)
+        val livePageList = sourceFactory.toLiveData(pageSize)
+
+        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+            it.initialLoad
+        }
+
+        return Listing(
+            pagedList = livePageList,
+            networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.networkState
+            },
+            refreshState = refreshState,
+            refresh = {sourceFactory.sourceLiveData.value?.invalidate()},
+            retry = {sourceFactory.sourceLiveData.value?.retryAllFailed()}
+        )
+    }
 }

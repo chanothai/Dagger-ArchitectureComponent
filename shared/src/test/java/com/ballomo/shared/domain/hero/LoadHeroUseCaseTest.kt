@@ -1,7 +1,7 @@
 package com.ballomo.shared.domain.hero
 
-import com.ballomo.shared.domain.hero.entity.HeroEntity
-import com.ballomo.shared.domain.hero.entity.Results
+import com.ballomo.shared.data.entity.HeroEntity
+import com.ballomo.shared.data.entity.Results
 import com.ballomo.shared.data.repository.HeroRepo
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals

@@ -44,6 +44,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$ver.coreKtx"
     implementation "androidx.constraintlayout:constraintlayout:$ver.conLayout"
     implementation "androidx.legacy:legacy-support-v4:$ver.legacy"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:$ver.testRun"
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
@@ -80,7 +81,6 @@ dependencies {
     //Interceptor OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$ver.interceptor"
 
-
     //DataBinding
     kapt "com.android.databinding:compiler:$ver.dataBinding"
 
@@ -97,4 +97,7 @@ dependencies {
     //Navigate
     implementation "androidx.navigation:navigation-fragment:$ver.navigate" // For Kotlin use navigation-fragment-ktx
     implementation "androidx.navigation:navigation-ui:$ver.navigate" // For Kotlin use navigation-ui-ktx
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:$ver.paging"
 }

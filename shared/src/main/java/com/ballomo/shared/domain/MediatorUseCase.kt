@@ -7,6 +7,5 @@ abstract class MediatorUseCase<in P, R> {
 
     open fun observe(): MediatorLiveData<Result<R>> = result
 
-    abstract fun executeLoadAll(parameters: P)
-    abstract fun executeLoadByPage(parameters: P)
+    abstract fun execute(parameters: P)
 }

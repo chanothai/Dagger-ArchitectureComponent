@@ -1,4 +1,4 @@
-package com.ballomo.thelastavenger.ui.hero
+package com.ballomo.thelastavenger.ui.hero.all
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.ballomo.shared.domain.Result
 import com.ballomo.thelastavenger.domain.LoadHeroUseCase
 import com.ballomo.shared.util.map
+import com.ballomo.thelastavenger.ui.hero.all.PostHeroListAdapter
 import javax.inject.Inject
 
 class HeroViewModel @Inject constructor(
@@ -27,6 +28,6 @@ class HeroViewModel @Inject constructor(
     }
 
     fun loadHeroInformation() {
-        loadHeroUseCase.executeLoadAll(Unit)
+        loadHeroUseCase.execute(Unit)
     }
 }

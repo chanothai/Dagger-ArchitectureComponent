@@ -3,11 +3,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".ui.hero.MainActivity">
+        tools:context="com.ballomo.thelastavenger.ui.hero.all.MainFragment"
+>
 
     <data>
         <variable name="viewModel"
-                  type="com.ballomo.thelastavenger.ui.hero.HeroViewModel"/>
+                  type="com.ballomo.thelastavenger.ui.hero.all.HeroViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +32,8 @@
                 android:id="@+id/post_hero"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

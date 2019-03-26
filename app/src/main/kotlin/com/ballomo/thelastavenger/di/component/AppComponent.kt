@@ -1,10 +1,7 @@
 package com.ballomo.thelastavenger.di.component
 
 import com.ballomo.thelastavenger.AwesomeApplication
-import com.ballomo.thelastavenger.di.module.ActivityModule
-import com.ballomo.thelastavenger.di.module.AppModule
-import com.ballomo.thelastavenger.di.module.NetWorkModule
-import com.ballomo.thelastavenger.di.module.ViewModelModule
+import com.ballomo.thelastavenger.di.module.*
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -17,7 +14,8 @@ import javax.inject.Singleton
         ActivityModule::class,
         AppModule::class,
         ViewModelModule::class,
-        NetWorkModule::class
+        NetWorkModule::class,
+        HeroUseCaseModule::class
     ]
 )
 

@@ -1,6 +1,6 @@
 package com.ballomo.thelastavenger.domain
 
-import com.ballomo.shared.data.repository.HeroAdapter
+import com.ballomo.shared.data.HeroAdapter
 import com.ballomo.shared.domain.MediatorUseCase
 import com.ballomo.shared.domain.Result
 import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
@@ -11,9 +11,8 @@ class LoadHeroUseCase @Inject constructor(
     private val heroRepo: HeroAdapter
 ) : MediatorUseCase<Any, ListHeroInformation>() {
 
-    override fun executeLoadAll(parameters: Any){
+    override fun execute(parameters: Any){
         result.postValue(Result.Loading)
-
         val heroSessionObservable = heroRepo.getAll()
 
         result.removeSource(heroSessionObservable)
@@ -34,10 +33,5 @@ class LoadHeroUseCase @Inject constructor(
             }
             is Result.Error -> { result.postValue(it) }
         }}
-    }
-
-    override fun executeLoadByPage(parameters: Any) {
-        result.postValue(Result.Loading)
-
     }
 }
