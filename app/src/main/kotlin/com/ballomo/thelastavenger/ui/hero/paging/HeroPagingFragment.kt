@@ -35,7 +35,8 @@ class HeroPagingFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
-        heroPagingViewModel.requestHeroPaging(InputLoadHero(20))
+        // page size is it will loading later when scroll item to (itemAll - N) // 1 is N
+        heroPagingViewModel.requestHeroPaging(InputLoadHero(1))
     }
 
     private fun initAdapter() {
@@ -44,8 +45,13 @@ class HeroPagingFragment : BaseFragment() {
         }
 
         recyclerView_paging.adapter = adapter
+
         heroPagingViewModel.loadHeroPagedListResult.observe(this, Observer {
             adapter.submitList(it)
+        })
+
+        heroPagingViewModel.networkState.observe(this, Observer {
+            adapter.setNetworkState(it)
         })
     }
 

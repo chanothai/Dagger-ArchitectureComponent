@@ -16,9 +16,9 @@ class HeroPagingViewModel@Inject constructor(
         loadHeroWithPageUseCase.execute(it)
     }
 
-    val loadHeroPagedListResult = Transformations.switchMap(repoResult) {
-        it.pagedList
-    }!!
+    val loadHeroPagedListResult = Transformations.switchMap(repoResult) { it.pagedList }!!
+
+    val networkState = Transformations.switchMap(repoResult) { it.networkState }!!
 
     fun requestHeroPaging(parameters: InputLoadHero): Boolean {
         if (inputLoadHero.value == parameters) {
@@ -30,7 +30,10 @@ class HeroPagingViewModel@Inject constructor(
     }
 
     fun retryLoadHero() {
-        val listing = repoResult.value
-        listing?.retry?.invoke()
+        repoResult.value?.retry?.invoke()
+    }
+
+    fun refreshLoadHero() {
+        repoResult.value?.refresh?.invoke()
     }
 }

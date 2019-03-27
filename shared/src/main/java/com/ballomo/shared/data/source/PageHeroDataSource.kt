@@ -5,6 +5,8 @@ import androidx.paging.PageKeyedDataSource
 import com.ballomo.shared.data.NetworkState
 import com.ballomo.shared.data.api.HeroApi
 import com.ballomo.shared.data.entity.hero.Results
+import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Executor
@@ -38,14 +40,12 @@ class PageHeroDataSource(
             .subscribeOn(Schedulers.io())
             .doOnSubscribe {
                 networkState.postValue(NetworkState.LOADING)
-                initialLoad.postValue(NetworkState.LOADING)
-            }
+                initialLoad.postValue(NetworkState.LOADING) }
             .doFinally {
                 networkState.postValue(NetworkState.LOADED)
-                initialLoad.postValue(NetworkState.LOADED)
-            }
+                initialLoad.postValue(NetworkState.LOADED) }
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     callback.onResult(it.results,0, it.info.pages ?: 1,1 , 2)
                 },
                 onError = {
@@ -66,7 +66,7 @@ class PageHeroDataSource(
             .doOnSubscribe { networkState.postValue(NetworkState.LOADING) }
             .doFinally { networkState.postValue(NetworkState.LOADED) }
             .subscribeBy(
-                onNext = {
+                onSuccess = {
                     retry = null
                     callback.onResult(it.results, params.key.plus(1))
                 },
@@ -82,7 +82,6 @@ class PageHeroDataSource(
                     )
                 }
             ).isDisposed
-
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Results>) {

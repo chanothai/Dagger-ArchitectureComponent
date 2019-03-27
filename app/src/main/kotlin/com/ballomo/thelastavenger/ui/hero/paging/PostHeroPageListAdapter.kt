@@ -31,8 +31,8 @@ class PostHeroPageListAdapter(
 
             R.layout.network_state_layout -> NetWorkStateViewHolder.create(
                 parent,
-                retryCallback
-            )
+                retryCallback)
+
             else -> throw IllegalArgumentException("unknown view type: $viewType")
         }
     }
@@ -58,7 +58,6 @@ class PostHeroPageListAdapter(
         }
     }
 
-    private fun hasExtraRow() = networkState != null && networkState != NetworkState.LOADED
 
     override fun getItemViewType(position: Int): Int {
         return if (hasExtraRow() && position == itemCount - 1) {
@@ -72,12 +71,33 @@ class PostHeroPageListAdapter(
         return super.getItemCount() + if (hasExtraRow()) 1 else 0
     }
 
+    private fun hasExtraRow():Boolean = networkState != null && networkState != NetworkState.LOADED
+
+    fun setNetworkState(newNetWorkState: NetworkState) {
+        val previousState = this.networkState
+        val hadExtraRow = hasExtraRow()
+
+        this.networkState = newNetWorkState
+        val hasExtraRow = hasExtraRow()
+
+        if (hadExtraRow != hasExtraRow) {
+            if (hadExtraRow) {
+                notifyItemRemoved(super.getItemCount())
+            }else {
+                notifyItemInserted(super.getItemCount())
+            }
+        }else if (hasExtraRow && previousState != newNetWorkState) {
+            notifyItemChanged(itemCount - 1)
+        }
+    }
+
     companion object {
         val POST_COMPARATOR = object : DiffUtil.ItemCallback<Results>() {
             override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean =
                 oldItem.name == newItem.name
 
-            override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean = oldItem.name == newItem.name
+            override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean =
+                oldItem.name == newItem.name
         }
     }
 }

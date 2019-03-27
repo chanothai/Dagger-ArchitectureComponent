@@ -1,5 +1,6 @@
 package com.ballomo.shared.data.repository
 
+import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
@@ -26,7 +27,7 @@ class HeroRepo @Inject constructor(
         heroApi.getHeros()
             .subscribeOn(Schedulers.io())
             .subscribeBy(
-                onNext = {sessionResult.postValue(Result.Success(it))},
+                onSuccess = {sessionResult.postValue(Result.Success(it))},
                 onError = {sessionResult.postValue(Result.Error(it))}
             ).isDisposed
 
@@ -37,20 +38,20 @@ class HeroRepo @Inject constructor(
         //Not yet implement
     }
 
+    @MainThread
     override fun getByPage(pageSize: Int): Listing<Results> {
         val sourceFactory = HeroDataSourceFactory(heroApi)
-        val livePageList = sourceFactory.toLiveData(pageSize)
 
-        val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-            it.initialLoad
-        }
+        val livePageList = sourceFactory.toLiveData(pageSize)
 
         return Listing(
             pagedList = livePageList,
             networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
                 it.networkState
             },
-            refreshState = refreshState,
+            refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+                it.initialLoad
+            },
             refresh = {sourceFactory.sourceLiveData.value?.invalidate()},
             retry = {sourceFactory.sourceLiveData.value?.retryAllFailed()}
         )
