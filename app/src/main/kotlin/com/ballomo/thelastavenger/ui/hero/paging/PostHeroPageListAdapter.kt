@@ -15,7 +15,7 @@ import com.ballomo.thelastavenger.ui.hero.model.LoadHeroInformation
 
 class PostHeroPageListAdapter(
     private val retryCallback:() -> Unit
-): PagedListAdapter<Results, RecyclerView.ViewHolder>(POST_COMPARATOR) {
+): PagedListAdapter<Results, RecyclerView.ViewHolder>(DiffCallback) {
     private var networkState: NetworkState? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,17 +38,17 @@ class PostHeroPageListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val result = getItem(position)
-
-        val loadHeroInformation = result?.let {
-            return@let LoadHeroInformation(
-                it.name ?: "",
-                it.image ?: ""
-            )
-        }
-
         when(getItemViewType(position)) {
             R.layout.item_information_hero_post -> {
+                val result = getItem(position)
+
+                val loadHeroInformation = result?.let {
+                    return@let LoadHeroInformation(
+                        it.name ?: "",
+                        it.image ?: ""
+                    )
+                }
+
                 loadHeroInformation?.let {
                     (holder as PostHeroListViewHolder).bind(it)
                 }
@@ -60,7 +60,7 @@ class PostHeroPageListAdapter(
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (hasExtraRow() && position == itemCount - 1) {
+        return if (hasExtraRow() && position == (itemCount - 1)) {
             R.layout.network_state_layout
         }else {
             R.layout.item_information_hero_post
@@ -73,31 +73,29 @@ class PostHeroPageListAdapter(
 
     private fun hasExtraRow():Boolean = networkState != null && networkState != NetworkState.LOADED
 
-    fun setNetworkState(newNetWorkState: NetworkState) {
+    fun setNetworkState(newNetworkState: NetworkState?) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
-
-        this.networkState = newNetWorkState
+        this.networkState = newNetworkState
         val hasExtraRow = hasExtraRow()
-
         if (hadExtraRow != hasExtraRow) {
             if (hadExtraRow) {
                 notifyItemRemoved(super.getItemCount())
-            }else {
+            } else {
                 notifyItemInserted(super.getItemCount())
             }
-        }else if (hasExtraRow && previousState != newNetWorkState) {
+        } else if (hasExtraRow && previousState != newNetworkState) {
             notifyItemChanged(itemCount - 1)
         }
     }
 
     companion object {
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Results>() {
+        val DiffCallback = object : DiffUtil.ItemCallback<Results>() {
             override fun areItemsTheSame(oldItem: Results, newItem: Results): Boolean =
                 oldItem.name == newItem.name
 
             override fun areContentsTheSame(oldItem: Results, newItem: Results): Boolean =
-                oldItem.name == newItem.name
+                oldItem == newItem
         }
     }
 }

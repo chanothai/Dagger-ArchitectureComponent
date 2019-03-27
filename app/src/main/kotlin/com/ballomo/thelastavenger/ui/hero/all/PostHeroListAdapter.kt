@@ -11,7 +11,7 @@ import com.ballomo.thelastavenger.ui.hero.model.LoadHeroInformation
 
 class PostHeroListAdapter: RecyclerView.Adapter<PostHeroListViewHolder>() {
 
-    var heroList = ListHeroInformation(arrayListOf())
+    var heroList: ListHeroInformation? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHeroListViewHolder {
         val binding: ItemInformationHeroPostBinding = DataBindingUtil.inflate(
@@ -24,11 +24,15 @@ class PostHeroListAdapter: RecyclerView.Adapter<PostHeroListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return if (heroList.heroInformation.isNotEmpty()) heroList.heroInformation.size else 0
+        return heroList?.let {
+            return@let if (it.heroInformation.isNotEmpty()) it.heroInformation.size else 0
+        } ?: 0
     }
 
     override fun onBindViewHolder(holder: PostHeroListViewHolder, position: Int) {
-        holder.bind(heroList.heroInformation[position])
+        heroList?.let {
+            holder.bind(it.heroInformation[position])
+        }
     }
 
     fun updateListHeroInformation(listHeroInformation: ListHeroInformation) {

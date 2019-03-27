@@ -24,7 +24,6 @@ class HeroPagingViewModel@Inject constructor(
         if (inputLoadHero.value == parameters) {
             return false
         }
-
         inputLoadHero.value = parameters
         return true
     }

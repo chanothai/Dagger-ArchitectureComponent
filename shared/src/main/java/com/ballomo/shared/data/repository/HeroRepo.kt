@@ -38,7 +38,6 @@ class HeroRepo @Inject constructor(
         //Not yet implement
     }
 
-    @MainThread
     override fun getByPage(pageSize: Int): Listing<Results> {
         val sourceFactory = HeroDataSourceFactory(heroApi)
 

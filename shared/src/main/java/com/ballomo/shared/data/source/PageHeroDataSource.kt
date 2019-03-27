@@ -7,6 +7,7 @@ import com.ballomo.shared.data.api.HeroApi
 import com.ballomo.shared.data.entity.hero.Results
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Executor
@@ -38,6 +39,7 @@ class PageHeroDataSource(
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Results>) {
         heroAPI.getHeroByPage(page)
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 networkState.postValue(NetworkState.LOADING)
                 initialLoad.postValue(NetworkState.LOADING) }
@@ -63,6 +65,7 @@ class PageHeroDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Results>) {
         heroAPI.getHeroByPage(params.key)
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { networkState.postValue(NetworkState.LOADING) }
             .doFinally { networkState.postValue(NetworkState.LOADED) }
             .subscribeBy(

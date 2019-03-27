@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.R
 import com.ballomo.thelastavenger.common.BaseFragment
@@ -44,6 +45,14 @@ class HeroPagingFragment : BaseFragment() {
             heroPagingViewModel.retryLoadHero()
         }
 
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (positionStart == 0) {
+                    recyclerView_paging.scrollToPosition(0)
+                }
+            }
+        })
+
         recyclerView_paging.adapter = adapter
 
         heroPagingViewModel.loadHeroPagedListResult.observe(this, Observer {
@@ -54,6 +63,4 @@ class HeroPagingFragment : BaseFragment() {
             adapter.setNetworkState(it)
         })
     }
-
-
 }

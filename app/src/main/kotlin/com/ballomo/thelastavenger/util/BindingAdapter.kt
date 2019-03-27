@@ -24,12 +24,14 @@ fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
 }
 
 @BindingAdapter("mutableText")
-fun setMutableText(view: TextView, text: String) {
-    view.text = text
+fun setMutableText(view: TextView, text: String?) {
+    text?.let {
+        view.text = it
+    }
 }
 
 @BindingAdapter(value = ["imageUrl", "circleCrop", "drawable"], requireAll = false)
-fun setImage(view: ImageView, url: String,isCircleCrop: Boolean, drawable: Drawable?) {
+fun setImage(view: ImageView, url: String?,isCircleCrop: Boolean, drawable: Drawable?) {
 
     val option = when(isCircleCrop) {
         true , drawable != null -> RequestOptions().apply {
@@ -43,10 +45,12 @@ fun setImage(view: ImageView, url: String,isCircleCrop: Boolean, drawable: Drawa
         }
     }
 
-    Glide.with(view.context)
-        .load(url)
-        .apply(option)
-        .into(view)
+    url?.let {
+        Glide.with(view.context)
+            .load(it)
+            .apply(option)
+            .into(view)
+    }
 }
 
 @BindingAdapter("adapterHero")
