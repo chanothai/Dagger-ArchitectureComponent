@@ -8,5 +8,5 @@ import com.ballomo.shared.domain.Result
 interface HeroAdapter {
     fun getAll(): LiveData<Result<HeroEntity>>
     fun get()
-    fun getByPage(pageSize: Int): Listing<Results>
+    fun getByPage(pageSize: Int): LiveData<Listing<Results>>
 }

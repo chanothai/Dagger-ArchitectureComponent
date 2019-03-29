@@ -1,8 +1,12 @@
 package com.ballomo.thelastavenger.ui.hero.paging
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.ballomo.shared.data.Listing
+import com.ballomo.shared.data.entity.hero.Results
+import com.ballomo.shared.util.map
 import com.ballomo.thelastavenger.domain.InputLoadHero
 import com.ballomo.thelastavenger.domain.LoadHeroWithPageUseCase
 import javax.inject.Inject
@@ -11,28 +15,25 @@ class HeroPagingViewModel@Inject constructor(
     private val loadHeroWithPageUseCase: LoadHeroWithPageUseCase
 ): ViewModel() {
 
-    private val inputLoadHero = MutableLiveData<InputLoadHero>()
-    private val repoResult = Transformations.map(inputLoadHero) {
-        loadHeroWithPageUseCase.execute(it)
+    private val loadHeroResult: LiveData<Listing<Results>> by lazy {
+        loadHeroWithPageUseCase.observe().map {
+            it
+        }
     }
 
-    val loadHeroPagedListResult = Transformations.switchMap(repoResult) { it.pagedList }!!
+    val loadHeroPagedListResult = Transformations.switchMap(loadHeroResult) { it.pagedList }!!
 
-    val networkState = Transformations.switchMap(repoResult) { it.networkState }!!
+    val networkState = Transformations.switchMap(loadHeroResult) { it.networkState }!!
 
-    fun requestHeroPaging(parameters: InputLoadHero): Boolean {
-        if (inputLoadHero.value == parameters) {
-            return false
-        }
-        inputLoadHero.value = parameters
-        return true
+    fun requestHeroPaging(parameters: InputLoadHero) {
+        loadHeroWithPageUseCase.execute(parameters)
     }
 
     fun retryLoadHero() {
-        repoResult.value?.retry?.invoke()
+        loadHeroResult.value?.retry?.invoke()
     }
 
     fun refreshLoadHero() {
-        repoResult.value?.refresh?.invoke()
+        loadHeroResult.value?.refresh?.invoke()
     }
 }

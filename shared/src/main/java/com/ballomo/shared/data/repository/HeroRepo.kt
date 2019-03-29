@@ -1,6 +1,6 @@
 package com.ballomo.shared.data.repository
 
-import androidx.annotation.MainThread
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
@@ -12,38 +12,43 @@ import com.ballomo.shared.data.entity.HeroEntity
 import com.ballomo.shared.data.entity.hero.Results
 import com.ballomo.shared.data.source.HeroDataSourceFactory
 import com.ballomo.shared.domain.Result
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-@Suppress("UNCHECKED_CAST")
 class HeroRepo @Inject constructor(
     private val heroApi: HeroApi
 ) : HeroAdapter {
 
-    private val sessionResult = MediatorLiveData<Result<HeroEntity>>()
-
+    @SuppressLint("CheckResult")
     override fun getAll(): LiveData<Result<HeroEntity>> {
+        val sessionResult = MediatorLiveData<Result<HeroEntity>>()
+
         heroApi.getHeros()
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {sessionResult.postValue(Result.Success(it))},
                 onError = {sessionResult.postValue(Result.Error(it))}
-            ).isDisposed
+            )
 
-    return sessionResult
+        return sessionResult
 }
 
     override fun get() {
         //Not yet implement
     }
 
-    override fun getByPage(pageSize: Int): Listing<Results> {
+    override fun getByPage(pageSize: Int): LiveData<Listing<Results>> {
+        val sessionPaging = MediatorLiveData<Listing<Results>>()
         val sourceFactory = HeroDataSourceFactory(heroApi)
 
         val livePageList = sourceFactory.toLiveData(pageSize)
 
-        return Listing(
+        Listing(
             pagedList = livePageList,
             networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
                 it.networkState
@@ -53,6 +58,10 @@ class HeroRepo @Inject constructor(
             },
             refresh = {sourceFactory.sourceLiveData.value?.invalidate()},
             retry = {sourceFactory.sourceLiveData.value?.retryAllFailed()}
-        )
+        ).also {listing->
+            sessionPaging.postValue(listing)
+        }
+
+        return sessionPaging
     }
 }

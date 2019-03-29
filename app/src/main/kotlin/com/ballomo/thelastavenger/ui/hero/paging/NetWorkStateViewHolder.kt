@@ -12,8 +12,7 @@ import com.ballomo.shared.data.Status
 import com.ballomo.thelastavenger.R
 
 class NetWorkStateViewHolder(
-    val view: View,
-    private val retryCallback:() -> Unit): RecyclerView.ViewHolder(view) {
+    val view: View, private val retryCallback:() -> Unit): RecyclerView.ViewHolder(view) {
     private val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
     private val retry = view.findViewById<Button>(R.id.retry_button)
     private val errorMsg = view.findViewById<TextView>(R.id.error_msg)
@@ -25,12 +24,9 @@ class NetWorkStateViewHolder(
     }
 
     fun bindTo(netWorkState: NetworkState?) {
-        progressBar.visibility =
-            toVisibility(netWorkState?.status == Status.RUNNING)
-        retry.visibility =
-            toVisibility(netWorkState?.status == Status.FAILED)
-        errorMsg.visibility =
-            toVisibility(netWorkState?.status != null)
+        progressBar.visibility = toVisibility(netWorkState?.status == Status.RUNNING)
+        retry.visibility = toVisibility(netWorkState?.status == Status.FAILED)
+        errorMsg.visibility = toVisibility(netWorkState?.status != null)
         errorMsg.text = netWorkState?.msg
     }
 

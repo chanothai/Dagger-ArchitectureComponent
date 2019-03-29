@@ -50,16 +50,16 @@ class MainFragment : BaseFragment() {
     }
 
     private fun observeHeroInformation() {
-        heroViewModel.loadHeroResult.observe(this, Observer {
-            when(it) {
-                is ListHeroInformation -> {
-                    binding.viewModel?.loadingVisibility?.value = View.GONE
-                    binding.viewModel?.postHeroListAdapter?.updateListHeroInformation(it)
-                }
-                is Boolean -> {
-                    binding.viewModel?.loadingVisibility?.value = View.VISIBLE
-                }
-            }
-        })
+//        heroViewModel.loadHeroResult.observe(this, Observer {
+//            when(it) {
+//                is ListHeroInformation -> {
+//                    binding.viewModel?.loadingVisibility?.value = View.GONE
+//                    binding.viewModel?.postHeroListAdapter?.updateListHeroInformation(it)
+//                }
+//                is Boolean -> {
+//                    binding.viewModel?.loadingVisibility?.value = View.VISIBLE
+//                }
+//            }
+//        })
     }
 }
