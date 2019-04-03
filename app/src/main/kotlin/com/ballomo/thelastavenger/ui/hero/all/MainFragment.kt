@@ -6,12 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.common.BaseFragment
 import com.ballomo.thelastavenger.databinding.FragmentMainBinding
-import com.ballomo.thelastavenger.ui.hero.MainActivity
-import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
 
 /**
  * A simple [Fragment] subclass.
@@ -28,8 +24,6 @@ class MainFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory = (activity as MainActivity).viewModelFactory
-        heroViewModel = viewModelProvider(factory)
     }
 
     override fun onCreateView(

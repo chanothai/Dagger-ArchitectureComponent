@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.R
@@ -17,11 +18,12 @@ import javax.inject.Inject
 
 class HeroPagingFragment : BaseFragment() {
 
-    @Inject lateinit var heroPagingViewModel: HeroPagingViewModel
+    @Inject lateinit var factory: ViewModelProvider.Factory
+
+    private lateinit var heroPagingViewModel: HeroPagingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val factory = (activity as MainActivity).viewModelFactory
         heroPagingViewModel = viewModelProvider(factory)
     }
 
@@ -37,21 +39,15 @@ class HeroPagingFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
         // page size is it will loading later when scroll item to (itemAll - N) // 1 is N
-        heroPagingViewModel.requestHeroPaging(InputLoadHero(1))
+        if (savedInstanceState == null) {
+            heroPagingViewModel.requestHeroPaging(InputLoadHero(1))
+        }
     }
 
     private fun initAdapter() {
         val adapter = PostHeroPageListAdapter {
             heroPagingViewModel.retryLoadHero()
         }
-
-        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                if (positionStart == 0) {
-                    recyclerView_paging.scrollToPosition(0)
-                }
-            }
-        })
 
         recyclerView_paging.adapter = adapter
 
