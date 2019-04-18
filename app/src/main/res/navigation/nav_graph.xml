@@ -3,14 +3,14 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/heroPagingFragment3">
+            app:startDestination="@id/heroPagingFragment">
 
     <fragment android:id="@+id/mainFragment"
               android:name="com.ballomo.thelastavenger.ui.hero.all.MainFragment"
               android:label="fragment_main"
               tools:layout="@layout/fragment_main">
     </fragment>
-    <fragment android:id="@+id/heroPagingFragment3"
+    <fragment android:id="@+id/heroPagingFragment"
               android:name="com.ballomo.thelastavenger.ui.hero.paging.HeroPagingFragment"
               android:label="fragment_hero_paging" tools:layout="@layout/fragment_hero_paging"/>
 </navigation>

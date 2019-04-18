@@ -12,10 +12,6 @@ import javax.inject.Singleton
 class HeroUseCaseModule {
     @Singleton
     @Provides
-    fun provideLoadHeroUseCase(heroRepo: HeroRepo) = LoadHeroUseCase(heroRepo)
-
-    @Singleton
-    @Provides
     fun provideHeroRepository(heroApi: HeroApi) = HeroRepo(heroApi)
 
     @Singleton

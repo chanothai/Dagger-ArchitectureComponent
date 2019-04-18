@@ -8,7 +8,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
-class RetrofitFactory @Inject constructor(
+class RetrofitFactory (
     private val okHttpClientFactory: OKHttpClientFactory) {
 
     fun retrofitBuilder(): Retrofit {

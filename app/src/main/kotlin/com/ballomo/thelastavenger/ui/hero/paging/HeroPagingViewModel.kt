@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.ballomo.shared.data.Listing
 import com.ballomo.shared.data.entity.hero.Results
 import com.ballomo.shared.util.map
 import com.ballomo.thelastavenger.domain.InputLoadHero
 import com.ballomo.thelastavenger.domain.LoadHeroWithPageUseCase
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 class HeroPagingViewModel@Inject constructor(
@@ -17,12 +19,11 @@ class HeroPagingViewModel@Inject constructor(
 
     private val loadHeroResult: LiveData<Listing<Results>> by lazy {
         loadHeroWithPageUseCase.observe().map {
-            it
+            return@map it
         }
     }
 
     val loadHeroPagedListResult = Transformations.switchMap(loadHeroResult) { it.pagedList }!!
-
     val networkState = Transformations.switchMap(loadHeroResult) { it.networkState }!!
 
     fun requestHeroPaging(parameters: InputLoadHero) {

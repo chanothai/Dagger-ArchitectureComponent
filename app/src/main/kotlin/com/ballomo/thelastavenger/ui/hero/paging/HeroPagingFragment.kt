@@ -6,32 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.ballomo.shared.util.viewModelProvider
 import com.ballomo.thelastavenger.R
 import com.ballomo.thelastavenger.common.BaseFragment
 import com.ballomo.thelastavenger.domain.InputLoadHero
-import com.ballomo.thelastavenger.ui.hero.MainActivity
 import kotlinx.android.synthetic.main.fragment_hero_paging.*
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HeroPagingFragment : BaseFragment() {
 
-    @Inject lateinit var factory: ViewModelProvider.Factory
-
-    private lateinit var heroPagingViewModel: HeroPagingViewModel
+    private val heroPagingViewModel: HeroPagingViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        heroPagingViewModel = viewModelProvider(factory)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_hero_paging, container, false)
     }
 

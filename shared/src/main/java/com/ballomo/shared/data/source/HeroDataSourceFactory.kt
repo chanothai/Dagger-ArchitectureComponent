@@ -1,5 +1,6 @@
 package com.ballomo.shared.data.source
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.ballomo.shared.data.api.HeroApi
@@ -9,7 +10,7 @@ class HeroDataSourceFactory(
     private val heroAPI: HeroApi
 ) : DataSource.Factory<Int, Results>() {
 
-    val sourceLiveData = MutableLiveData<PageHeroDataSource>()
+    val sourceLiveData = MediatorLiveData<PageHeroDataSource>()
 
     override fun create(): DataSource<Int, Results>
     {

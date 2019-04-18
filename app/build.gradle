@@ -44,7 +44,6 @@ dependencies {
     implementation "androidx.core:core-ktx:$ver.coreKtx"
     implementation "androidx.constraintlayout:constraintlayout:$ver.conLayout"
     implementation "androidx.legacy:legacy-support-v4:$ver.legacy"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:$ver.testRun"
     androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
@@ -100,4 +99,11 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:$ver.paging"
+
+    // Koin for Android - Scope feature
+    implementation 'org.koin:koin-android:2.0.0-rc-2'
+    // Koin AndroidX Scope feature
+    implementation 'org.koin:koin-androidx-scope:2.0.0-rc-2'
+    // Koin AndroidX ViewModel feature
+    implementation 'org.koin:koin-androidx-viewmodel:2.0.0-rc-2'
 }

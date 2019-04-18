@@ -7,7 +7,7 @@ import com.ballomo.shared.domain.MediatorUseCase
 import com.ballomo.shared.domain.Result
 import javax.inject.Inject
 
-class LoadHeroWithPageUseCase@Inject constructor(
+class LoadHeroWithPageUseCase(
     private val heroRepo: HeroAdapter
 ): MediatorUseCase<InputLoadHero, Listing<Results>>() {
 

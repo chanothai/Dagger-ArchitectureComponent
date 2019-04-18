@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.ballomo.thelastavenger.common.BaseFragment
+import androidx.lifecycle.Observer
+import com.ballomo.shared.data.HeroAdapter
 import com.ballomo.thelastavenger.databinding.FragmentMainBinding
+import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -15,10 +19,10 @@ import com.ballomo.thelastavenger.databinding.FragmentMainBinding
  * create an instance of this fragment.
  *
  */
-class MainFragment : BaseFragment() {
+class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
-    private lateinit var heroViewModel: HeroViewModel
+    private val heroViewModel: HeroViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +48,8 @@ class MainFragment : BaseFragment() {
     }
 
     private fun observeHeroInformation() {
-//        heroViewModel.loadHeroResult.observe(this, Observer {
-//            when(it) {
-//                is ListHeroInformation -> {
-//                    binding.viewModel?.loadingVisibility?.value = View.GONE
-//                    binding.viewModel?.postHeroListAdapter?.updateListHeroInformation(it)
-//                }
-//                is Boolean -> {
-//                    binding.viewModel?.loadingVisibility?.value = View.VISIBLE
-//                }
-//            }
-//        })
+        heroViewModel.loadHeroResult.observe(this, Observer {
+            heroViewModel.postHeroListAdapter.updateListHeroInformation(it)
+        })
     }
 }
