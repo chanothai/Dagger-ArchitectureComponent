@@ -12,11 +12,6 @@ import dagger.multibindings.IntoMap
 abstract class HeroModule {
     @Binds
     @IntoMap
-    @ViewModelKey(HeroViewModel::class)
-    abstract fun bindHeroViewModel(viewModel: HeroViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(HeroPagingViewModel::class)
     abstract fun bindHeroPagingViewModel(viewModel: HeroPagingViewModel): ViewModel
 }

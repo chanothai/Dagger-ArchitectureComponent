@@ -7,25 +7,20 @@ import com.ballomo.shared.domain.Result
 import com.ballomo.thelastavenger.domain.LoadHeroUseCase
 import com.ballomo.shared.util.map
 import com.ballomo.thelastavenger.ui.hero.all.PostHeroListAdapter
+import com.ballomo.thelastavenger.ui.hero.model.ListHeroInformation
 import javax.inject.Inject
 
-class HeroViewModel @Inject constructor(
+class HeroViewModel (
     private val loadHeroUseCase: LoadHeroUseCase
 ) : ViewModel() {
     val postHeroListAdapter by lazy { PostHeroListAdapter() }
     val loadingVisibility by lazy { MutableLiveData<Int>() }
 
-//    val loadHeroResult: LiveData<Any> by lazy {
-//        loadHeroUseCase.observe().map {
-//            when(it) {
-//                is Result.Success -> {return@map it.data}
-//                is Result.Error -> {return@map it.exception}
-//                else -> {
-//                    return@map it == Result.Loading
-//                }
-//            }
-//        }
-//    }
+    val loadHeroResult: LiveData<ListHeroInformation> by lazy {
+        loadHeroUseCase.observe().map {
+            it
+        }
+    }
 
     fun loadHeroInformation() {
         loadHeroUseCase.execute(Unit)

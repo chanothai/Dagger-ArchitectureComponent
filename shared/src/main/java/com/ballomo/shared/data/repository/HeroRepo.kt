@@ -13,13 +13,11 @@ import com.ballomo.shared.data.entity.hero.Results
 import com.ballomo.shared.data.source.HeroDataSourceFactory
 import com.ballomo.shared.domain.Result
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HeroRepo @Inject constructor(
+class HeroRepo (
     private val heroApi: HeroApi
 ) : HeroAdapter {
 
