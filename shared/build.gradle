@@ -1,0 +1,77 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-kapt"
+apply from: "$project.rootDir/tools/config.gradle"
+
+android {
+    compileSdkVersion config.compileSdk
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+}
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$config.kotlin"
+    implementation "androidx.appcompat:appcompat:$ver.appCompat"
+    implementation "androidx.core:core-ktx:$ver.coreKtx"
+    implementation "androidx.constraintlayout:constraintlayout:$ver.conLayout"
+    implementation "androidx.legacy:legacy-support-v4:$ver.legacy"
+
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "androidx.test:runner:$ver.testRun"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$ver.espresso"
+
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$ver.lifecycle"
+    kapt "androidx.lifecycle:lifecycle-compiler:$ver.lifecycle"
+    testImplementation "androidx.arch.core:core-testing:$ver.lifecycle"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:$ver.dagger"
+    kapt "com.google.dagger:dagger-compiler:$ver.dagger"
+
+    //Dagger + Android
+    implementation("com.google.dagger:dagger-android:$ver.dagger") {
+        exclude group: "com.android.support"
+    }
+    implementation("com.google.dagger:dagger-android-support:$ver.dagger") {
+        exclude group: "com.android.support"
+    }
+    kapt("com.google.dagger:dagger-android-processor:$ver.dagger") {
+        exclude group: "com.android.support"
+    }
+
+    //Rx2
+    implementation "io.reactivex.rxjava2:rxandroid:$ver.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$ver.rxKotlin"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$ver.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$ver.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$ver.retrofit"
+
+    //Interceptor OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$ver.interceptor"
+
+    //Mockito
+    testImplementation "androidx.arch.core:core-testing:$ver.mockitoCore"
+    testImplementation "org.mockito:mockito-inline:$ver.mockitoInline"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:$ver.paging"
+}

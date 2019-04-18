@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="heroInformation"
+                  type="com.ballomo.thelastavenger.ui.hero.model.LoadHeroInformation"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:padding="@dimen/padding_small">
+
+        <ImageView
+                android:id="@+id/img_hero"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:imageUrl="@{heroInformation.image}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/txt_name"
+                app:circleCrop="@{true}"
+                tools:src="@tools:sample/avatars"
+                android:contentDescription="@string/icon_avatar"
+        />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_name"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:padding="4dp"
+                app:mutableText="@{heroInformation.name}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_hero"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Test"
+        />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
